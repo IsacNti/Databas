@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.sql.*;
 
 
-public class DB {
+public class model {
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -15,8 +15,7 @@ public class DB {
                             "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                     user,password);
 */
-            conn = DriverManager.getConnection("jdbc:mysql://" + env.DBURL + ":" + env.port + "/" + env.DBname +
-                            "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
+            conn = DriverManager.getConnection("jdbc:mysql://" + env.DBURL + ":" + env.port + "/" + env.DBname + "? allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC",
                     env.user, env.password);
 
         } catch (SQLException e) {
@@ -26,7 +25,7 @@ public class DB {
 
         try {
             Statement stmt = conn.createStatement();
-            String SQLQuery = env.DBtable;
+            String SQLQuery = "select * from " + env.DBtable;
             ResultSet result = stmt.executeQuery(SQLQuery);
 
             ResultSetMetaData metadata = result.getMetaData();
@@ -51,5 +50,10 @@ public class DB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getData() {
+
+        return null;
     }
 }
